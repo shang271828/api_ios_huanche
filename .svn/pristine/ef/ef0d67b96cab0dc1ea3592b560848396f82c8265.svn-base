@@ -1,0 +1,113 @@
+
+
+<?php
+class PraiseNotice extends MY_Controller
+{
+	function __construct()
+	{
+		parent ::__construct();
+		$this->load->database();
+		$this->load->helper("form");
+		$this->load->model("notice_model");	
+		$this->load->model("user_timeline_model");		
+	}
+
+	function index()
+	{
+	    $this->set_input();
+
+	    if($this->is_param_ok)
+	    {
+	    	$num = array('praise'=> '8',
+					 'worth' 	 => '4',
+					 'worthless' => '5' );
+			$this->is_done = $this->notice_model
+					 		->update_interact_list($this->do_type,
+					 							   $this->nid);
+			
+			$this->user_timeline_model
+									->insert( $this->uid,
+											  $this->nid,
+											  $num[$this->do_type]);
+	
+			$this->set_output();
+	    }
+		
+		$this->output->set_error_info($this->result,
+									  $this->description);	 			
+		$this->output->set_body("is_invoke",
+									$this->is_done);	
+			
+
+	}
+	
+	function view_test()
+	{	
+		$data['action'] = 'notice/praiseNotice';
+		$this->load->view('api_test_view',$data);
+	}
+
+	private function set_input()
+	{
+		$body = $this->input->body;
+	    $this->uid  	= $this->input->head->uid;
+		$this->nid 		= $body->nid;
+		$this->do_type  = $body->do_type;
+
+		$this->is_param_ok = $this->param_check();
+
+
+	}
+
+	private function set_output()
+	{
+		$tmp = array('praise'	=> '赞',
+					 'worth'	=> '值',
+					 'worthless'=> '不值');
+
+		$this->result      = '0';
+		if(!$this->is_done)
+		{			
+			$this->description = '已取消！';
+		}
+				
+		elseif($this->is_done == 1)
+		{
+			$this->description = '觉得你的车'.$tmp[$this->do_type];
+		}
+		else
+		{		
+			$this->description = '纠结之后，还是觉得你的车'.$tmp[$this->do_type];
+		}					
+	}
+
+	private function param_check()
+	{
+		$is_param_ok      = TRUE;
+		$is_param_missing = ! ($this->nid&&$this->do_type);
+		if ($is_param_missing)
+		{
+			$is_param_ok = FALSE;
+
+			$this->result = '1';
+			$this->description = PARAMETER_MISSING;
+
+		}
+		return $is_param_ok;
+
+	}
+}
+//input json:
+/*
+{
+ "head":{  
+   "uid"          : "1",  
+   "time"         : "2014-08-03 03:08:05", 
+   "token"        : "9fd98454b511ce20120ecb593ed177e3"
+  },
+ "body":{    
+   "nid"          : "1",
+   "do_type"      : "worth"
+  }
+}
+*/

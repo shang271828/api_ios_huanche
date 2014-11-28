@@ -1,0 +1,90 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+class Captcha_model extends MY_Model
+{
+
+	function __construct()
+	{
+		;parent::__construct()
+		;$this->load->database()
+		;$this->table_name = 'prefix_captcha'
+    	;$this->primary_key = 'uid'
+		;
+	}
+
+function is_phone_exist($phone)
+	{ 
+		; $sql = "SELECT `phone` 
+				  FROM `".$this->table_name."` 
+				  WHERE phone ='".$phone."'";
+		; $query =
+			$this->db->query($sql);
+		; 
+		; $result = $query->row_array();
+		; 
+		// 电话号码匹配时返回true，
+		// 否则返回false
+
+		if($result)
+			$bool = true;
+		else
+			$bool = false;
+		return $bool;
+	}
+
+	
+	function updateCaptcha($phone,$code)
+	{
+		; $data = array(
+					 'phone'	=> $phone
+					,'captcha'	=> $code
+					)
+		; $this->db->where('phone', $phone);
+		; $this->db->update($this->table_name, $data)
+		;
+		; $str = $this->db->last_query()
+
+		;
+	}
+
+	function addCaptcha($phone,$code)
+	{
+		; $data = array(
+					 'phone'	        => $phone
+					,'captcha'			=> $code
+					)
+		; $this->db->insert($this->table_name, $data)
+		;
+	}
+
+	function get_captcha($phone)
+	{
+		$query = $this->db->get_where($this->table_name,array("phone"=>$phone));
+		$result = $query->row();
+		
+		if($result)
+			$captcha = $result->{'captcha'};
+		else
+			$captcha = '';
+		return $captcha;
+		
+	}
+
+	private function define()
+	{
+		; $this->table_name = 'prefix_captcha';
+		; $this->columns 
+			= array( 'uid'
+					,'username'
+					,'password'
+					,'register_time'
+					,'register_email'
+					,'login_time'
+					,'login_coordinate'
+					,'notice_praise_list'
+					)
+		; 
+	}
+
+}
+
+

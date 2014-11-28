@@ -1,0 +1,434 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+DEBUG - 2014-11-12 01:45:19 --> Config Class Initialized
+DEBUG - 2014-11-12 01:45:19 --> Hooks Class Initialized
+DEBUG - 2014-11-12 01:45:19 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 01:45:19 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 01:45:19 --> URI Class Initialized
+DEBUG - 2014-11-12 01:45:19 --> Router Class Initialized
+DEBUG - 2014-11-12 01:45:19 --> Output Class Initialized
+DEBUG - 2014-11-12 01:45:19 --> Security Class Initialized
+DEBUG - 2014-11-12 01:45:19 --> Input Class Initialized
+DEBUG - 2014-11-12 01:45:19 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 08:45:19 --> Language Class Initialized
+DEBUG - 2014-11-12 08:45:19 --> Loader Class Initialized
+DEBUG - 2014-11-12 08:45:19 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 08:45:19 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 08:45:19 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 08:45:19 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 08:45:19 --> Controller Class Initialized
+DEBUG - 2014-11-12 08:45:19 --> Upload Class Initialized
+ERROR - 2014-11-12 08:45:19 --> Severity: Warning  --> First parameter must either be an object or the name of an existing class H:\wamp\www\CI_API\application\core\MY_Controller.php 13
+DEBUG - 2014-11-12 08:45:19 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 08:45:19 --> Model Class Initialized
+DEBUG - 2014-11-12 08:45:19 --> Model Class Initialized
+DEBUG - 2014-11-12 08:45:19 --> File loaded: application/views/notice/follow_notice_view.php
+DEBUG - 2014-11-12 08:45:19 --> Final output sent to browser
+DEBUG - 2014-11-12 08:45:19 --> Total execution time: 0.0460
+DEBUG - 2014-11-12 01:45:27 --> Config Class Initialized
+DEBUG - 2014-11-12 01:45:27 --> Hooks Class Initialized
+DEBUG - 2014-11-12 01:45:27 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 01:45:27 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 01:45:27 --> URI Class Initialized
+DEBUG - 2014-11-12 01:45:27 --> Router Class Initialized
+DEBUG - 2014-11-12 01:45:27 --> Output Class Initialized
+DEBUG - 2014-11-12 01:45:27 --> Security Class Initialized
+DEBUG - 2014-11-12 01:45:27 --> Input Class Initialized
+DEBUG - 2014-11-12 01:45:27 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 08:45:27 --> Language Class Initialized
+DEBUG - 2014-11-12 08:45:27 --> Loader Class Initialized
+DEBUG - 2014-11-12 08:45:27 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 08:45:27 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 08:45:27 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 08:45:27 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 08:45:27 --> Controller Class Initialized
+DEBUG - 2014-11-12 08:45:27 --> Upload Class Initialized
+DEBUG - 2014-11-12 08:45:27 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 08:45:27 --> Model Class Initialized
+DEBUG - 2014-11-12 08:45:27 --> Model Class Initialized
+ERROR - 2014-11-12 08:45:27 --> Severity: Notice  --> Undefined index: user_list_follow H:\wamp\www\CI_API\application\models\notice_model.php 1252
+ERROR - 2014-11-12 08:45:27 --> Severity: Notice  --> Undefined index: counter_follow H:\wamp\www\CI_API\application\models\notice_model.php 1253
+ERROR - 2014-11-12 08:45:27 --> Severity: Warning  --> Missing argument 3 for User_timeline_model::insert(), called in H:\wamp\www\CI_API\application\controllers\notice\followNotice.php on line 35 and defined H:\wamp\www\CI_API\application\models\user_timeline_model.php 11
+ERROR - 2014-11-12 08:45:27 --> Severity: Notice  --> Undefined variable: timeline_type H:\wamp\www\CI_API\application\models\user_timeline_model.php 17
+DEBUG - 2014-11-12 08:45:27 --> Final output sent to browser
+DEBUG - 2014-11-12 08:45:27 --> Total execution time: 0.0840
+DEBUG - 2014-11-12 01:46:34 --> Config Class Initialized
+DEBUG - 2014-11-12 01:46:34 --> Hooks Class Initialized
+DEBUG - 2014-11-12 01:46:34 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 01:46:34 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 01:46:34 --> URI Class Initialized
+DEBUG - 2014-11-12 01:46:34 --> Router Class Initialized
+DEBUG - 2014-11-12 01:46:34 --> Output Class Initialized
+DEBUG - 2014-11-12 01:46:34 --> Security Class Initialized
+DEBUG - 2014-11-12 01:46:34 --> Input Class Initialized
+DEBUG - 2014-11-12 01:46:34 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 08:46:34 --> Language Class Initialized
+DEBUG - 2014-11-12 08:46:34 --> Loader Class Initialized
+DEBUG - 2014-11-12 08:46:34 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 08:46:34 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 08:46:34 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 08:46:34 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 08:46:34 --> Controller Class Initialized
+DEBUG - 2014-11-12 08:46:34 --> Upload Class Initialized
+DEBUG - 2014-11-12 08:46:35 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 08:46:35 --> Model Class Initialized
+DEBUG - 2014-11-12 08:46:35 --> Model Class Initialized
+ERROR - 2014-11-12 08:46:35 --> Severity: Notice  --> Undefined index: user_list_follow H:\wamp\www\CI_API\application\models\notice_model.php 1252
+ERROR - 2014-11-12 08:46:35 --> Severity: Notice  --> Undefined index: counter_follow H:\wamp\www\CI_API\application\models\notice_model.php 1253
+DEBUG - 2014-11-12 08:46:35 --> Final output sent to browser
+DEBUG - 2014-11-12 08:46:35 --> Total execution time: 0.0910
+DEBUG - 2014-11-12 01:53:47 --> Config Class Initialized
+DEBUG - 2014-11-12 01:53:47 --> Hooks Class Initialized
+DEBUG - 2014-11-12 01:53:47 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 01:53:47 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 01:53:47 --> URI Class Initialized
+DEBUG - 2014-11-12 01:53:47 --> Router Class Initialized
+DEBUG - 2014-11-12 01:53:47 --> Output Class Initialized
+DEBUG - 2014-11-12 01:53:47 --> Security Class Initialized
+DEBUG - 2014-11-12 01:53:47 --> Input Class Initialized
+DEBUG - 2014-11-12 01:53:47 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 08:53:47 --> Language Class Initialized
+DEBUG - 2014-11-12 08:53:47 --> Loader Class Initialized
+DEBUG - 2014-11-12 08:53:47 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 08:53:47 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 08:53:47 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 08:53:47 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 08:53:47 --> Controller Class Initialized
+DEBUG - 2014-11-12 08:53:47 --> Upload Class Initialized
+ERROR - 2014-11-12 08:53:47 --> Severity: Warning  --> First parameter must either be an object or the name of an existing class H:\wamp\www\CI_API\application\core\MY_Controller.php 13
+DEBUG - 2014-11-12 08:53:47 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 08:53:47 --> Model Class Initialized
+DEBUG - 2014-11-12 08:53:47 --> Model Class Initialized
+DEBUG - 2014-11-12 08:53:47 --> File loaded: application/views/notice/share_notice_view.php
+DEBUG - 2014-11-12 08:53:47 --> Final output sent to browser
+DEBUG - 2014-11-12 08:53:47 --> Total execution time: 0.0630
+DEBUG - 2014-11-12 01:53:56 --> Config Class Initialized
+DEBUG - 2014-11-12 01:53:56 --> Hooks Class Initialized
+DEBUG - 2014-11-12 01:53:56 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 01:53:56 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 01:53:56 --> URI Class Initialized
+DEBUG - 2014-11-12 01:53:56 --> Router Class Initialized
+DEBUG - 2014-11-12 01:53:56 --> Output Class Initialized
+DEBUG - 2014-11-12 01:53:56 --> Security Class Initialized
+DEBUG - 2014-11-12 01:53:56 --> Input Class Initialized
+DEBUG - 2014-11-12 01:53:56 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 08:53:56 --> Language Class Initialized
+DEBUG - 2014-11-12 08:53:56 --> Loader Class Initialized
+DEBUG - 2014-11-12 08:53:56 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 08:53:56 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 08:53:56 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 08:53:56 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 08:53:56 --> Controller Class Initialized
+DEBUG - 2014-11-12 08:53:56 --> Upload Class Initialized
+DEBUG - 2014-11-12 08:53:56 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 08:53:56 --> Model Class Initialized
+DEBUG - 2014-11-12 08:53:56 --> Model Class Initialized
+DEBUG - 2014-11-12 08:53:56 --> Final output sent to browser
+DEBUG - 2014-11-12 08:53:56 --> Total execution time: 0.1010
+DEBUG - 2014-11-12 01:54:06 --> Config Class Initialized
+DEBUG - 2014-11-12 01:54:06 --> Hooks Class Initialized
+DEBUG - 2014-11-12 01:54:06 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 01:54:06 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 01:54:06 --> URI Class Initialized
+DEBUG - 2014-11-12 01:54:06 --> Router Class Initialized
+DEBUG - 2014-11-12 01:54:06 --> Output Class Initialized
+DEBUG - 2014-11-12 01:54:06 --> Security Class Initialized
+DEBUG - 2014-11-12 01:54:06 --> Input Class Initialized
+DEBUG - 2014-11-12 01:54:06 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 08:54:06 --> Language Class Initialized
+DEBUG - 2014-11-12 08:54:06 --> Loader Class Initialized
+DEBUG - 2014-11-12 08:54:06 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 08:54:06 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 08:54:06 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 08:54:06 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 08:54:06 --> Controller Class Initialized
+DEBUG - 2014-11-12 08:54:06 --> Upload Class Initialized
+DEBUG - 2014-11-12 08:54:06 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 08:54:06 --> Model Class Initialized
+DEBUG - 2014-11-12 08:54:06 --> Model Class Initialized
+DEBUG - 2014-11-12 08:54:06 --> Final output sent to browser
+DEBUG - 2014-11-12 08:54:06 --> Total execution time: 0.0900
+DEBUG - 2014-11-12 01:54:16 --> Config Class Initialized
+DEBUG - 2014-11-12 01:54:16 --> Hooks Class Initialized
+DEBUG - 2014-11-12 01:54:16 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 01:54:16 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 01:54:16 --> URI Class Initialized
+DEBUG - 2014-11-12 01:54:16 --> Router Class Initialized
+DEBUG - 2014-11-12 01:54:16 --> Output Class Initialized
+DEBUG - 2014-11-12 01:54:16 --> Security Class Initialized
+DEBUG - 2014-11-12 01:54:16 --> Input Class Initialized
+DEBUG - 2014-11-12 01:54:16 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 08:54:16 --> Language Class Initialized
+DEBUG - 2014-11-12 08:54:16 --> Loader Class Initialized
+DEBUG - 2014-11-12 08:54:16 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 08:54:16 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 08:54:16 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 08:54:16 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 08:54:16 --> Controller Class Initialized
+DEBUG - 2014-11-12 08:54:16 --> Upload Class Initialized
+DEBUG - 2014-11-12 08:54:16 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 08:54:16 --> Model Class Initialized
+DEBUG - 2014-11-12 08:54:16 --> Model Class Initialized
+DEBUG - 2014-11-12 08:54:16 --> Final output sent to browser
+DEBUG - 2014-11-12 08:54:16 --> Total execution time: 0.0840
+DEBUG - 2014-11-12 01:57:58 --> Config Class Initialized
+DEBUG - 2014-11-12 01:57:58 --> Hooks Class Initialized
+DEBUG - 2014-11-12 01:57:58 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 01:57:58 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 01:57:58 --> URI Class Initialized
+DEBUG - 2014-11-12 01:57:58 --> Router Class Initialized
+DEBUG - 2014-11-12 01:57:58 --> Output Class Initialized
+DEBUG - 2014-11-12 01:57:58 --> Security Class Initialized
+DEBUG - 2014-11-12 01:57:58 --> Input Class Initialized
+DEBUG - 2014-11-12 01:57:58 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 08:57:58 --> Language Class Initialized
+DEBUG - 2014-11-12 08:57:58 --> Loader Class Initialized
+DEBUG - 2014-11-12 08:57:58 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 08:57:58 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 08:57:58 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 08:57:58 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 08:57:58 --> Controller Class Initialized
+DEBUG - 2014-11-12 08:57:58 --> Upload Class Initialized
+ERROR - 2014-11-12 08:57:58 --> Severity: Warning  --> First parameter must either be an object or the name of an existing class H:\wamp\www\CI_API\application\core\MY_Controller.php 13
+DEBUG - 2014-11-12 08:57:58 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 08:57:58 --> Model Class Initialized
+DEBUG - 2014-11-12 08:57:58 --> Upload class already loaded. Second attempt ignored.
+DEBUG - 2014-11-12 08:57:58 --> File loaded: application/views/notice/publish_comment_notice_view.php
+DEBUG - 2014-11-12 08:57:58 --> Final output sent to browser
+DEBUG - 2014-11-12 08:57:58 --> Total execution time: 0.0550
+DEBUG - 2014-11-12 01:58:21 --> Config Class Initialized
+DEBUG - 2014-11-12 01:58:21 --> Hooks Class Initialized
+DEBUG - 2014-11-12 01:58:21 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 01:58:21 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 01:58:21 --> URI Class Initialized
+DEBUG - 2014-11-12 01:58:21 --> Router Class Initialized
+DEBUG - 2014-11-12 01:58:21 --> Output Class Initialized
+DEBUG - 2014-11-12 01:58:21 --> Security Class Initialized
+DEBUG - 2014-11-12 01:58:21 --> Input Class Initialized
+DEBUG - 2014-11-12 01:58:21 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 08:58:21 --> Language Class Initialized
+DEBUG - 2014-11-12 08:58:21 --> Loader Class Initialized
+DEBUG - 2014-11-12 08:58:21 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 08:58:21 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 08:58:21 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 08:58:21 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 08:58:21 --> Controller Class Initialized
+DEBUG - 2014-11-12 08:58:21 --> Upload Class Initialized
+DEBUG - 2014-11-12 08:58:21 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 08:58:21 --> Model Class Initialized
+DEBUG - 2014-11-12 08:58:21 --> Upload class already loaded. Second attempt ignored.
+DEBUG - 2014-11-12 08:58:21 --> Final output sent to browser
+DEBUG - 2014-11-12 08:58:21 --> Total execution time: 0.0830
+DEBUG - 2014-11-12 02:17:01 --> Config Class Initialized
+DEBUG - 2014-11-12 02:17:01 --> Hooks Class Initialized
+DEBUG - 2014-11-12 02:17:01 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 02:17:01 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 02:17:01 --> URI Class Initialized
+DEBUG - 2014-11-12 02:17:01 --> Router Class Initialized
+DEBUG - 2014-11-12 02:17:01 --> Output Class Initialized
+DEBUG - 2014-11-12 02:17:01 --> Security Class Initialized
+DEBUG - 2014-11-12 02:17:01 --> Input Class Initialized
+DEBUG - 2014-11-12 02:17:01 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 09:17:01 --> Language Class Initialized
+DEBUG - 2014-11-12 09:17:01 --> Loader Class Initialized
+DEBUG - 2014-11-12 09:17:01 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 09:17:01 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 09:17:01 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 09:17:01 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 09:17:01 --> Controller Class Initialized
+DEBUG - 2014-11-12 09:17:01 --> Upload Class Initialized
+ERROR - 2014-11-12 09:17:01 --> Severity: Warning  --> First parameter must either be an object or the name of an existing class H:\wamp\www\CI_API\application\core\MY_Controller.php 13
+DEBUG - 2014-11-12 09:17:01 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 09:17:01 --> Model Class Initialized
+DEBUG - 2014-11-12 09:17:01 --> Model Class Initialized
+DEBUG - 2014-11-12 09:17:01 --> Model Class Initialized
+DEBUG - 2014-11-12 09:17:01 --> Upload class already loaded. Second attempt ignored.
+DEBUG - 2014-11-12 09:17:01 --> File loaded: application/views/notice/publish_car_notice_view.php
+DEBUG - 2014-11-12 09:17:01 --> Final output sent to browser
+DEBUG - 2014-11-12 09:17:01 --> Total execution time: 0.0630
+DEBUG - 2014-11-12 02:17:03 --> Config Class Initialized
+DEBUG - 2014-11-12 02:17:03 --> Hooks Class Initialized
+DEBUG - 2014-11-12 02:17:03 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 02:17:03 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 02:17:03 --> URI Class Initialized
+DEBUG - 2014-11-12 02:17:03 --> Router Class Initialized
+DEBUG - 2014-11-12 02:17:03 --> Output Class Initialized
+DEBUG - 2014-11-12 02:17:03 --> Security Class Initialized
+DEBUG - 2014-11-12 02:17:03 --> Input Class Initialized
+DEBUG - 2014-11-12 02:17:03 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 09:17:03 --> Language Class Initialized
+DEBUG - 2014-11-12 09:17:03 --> Loader Class Initialized
+DEBUG - 2014-11-12 09:17:03 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 09:17:03 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 09:17:03 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 09:17:03 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 09:17:03 --> Controller Class Initialized
+DEBUG - 2014-11-12 09:17:03 --> Upload Class Initialized
+DEBUG - 2014-11-12 09:17:03 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 09:17:03 --> Model Class Initialized
+DEBUG - 2014-11-12 09:17:03 --> Model Class Initialized
+DEBUG - 2014-11-12 09:17:03 --> Model Class Initialized
+DEBUG - 2014-11-12 09:17:03 --> Upload class already loaded. Second attempt ignored.
+DEBUG - 2014-11-12 09:17:03 --> Final output sent to browser
+DEBUG - 2014-11-12 09:17:03 --> Total execution time: 0.0790
+DEBUG - 2014-11-12 03:03:11 --> Config Class Initialized
+DEBUG - 2014-11-12 03:03:11 --> Hooks Class Initialized
+DEBUG - 2014-11-12 03:03:11 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 03:03:11 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 03:03:11 --> URI Class Initialized
+DEBUG - 2014-11-12 03:03:11 --> Router Class Initialized
+DEBUG - 2014-11-12 03:03:11 --> Output Class Initialized
+DEBUG - 2014-11-12 03:03:11 --> Security Class Initialized
+DEBUG - 2014-11-12 03:03:11 --> Input Class Initialized
+DEBUG - 2014-11-12 03:03:11 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 10:03:11 --> Language Class Initialized
+DEBUG - 2014-11-12 10:03:11 --> Loader Class Initialized
+DEBUG - 2014-11-12 10:03:11 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 10:03:11 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 10:03:11 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 10:03:11 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 10:03:11 --> Controller Class Initialized
+DEBUG - 2014-11-12 10:03:11 --> Upload Class Initialized
+ERROR - 2014-11-12 10:03:11 --> Severity: Warning  --> First parameter must either be an object or the name of an existing class H:\wamp\www\CI_API\application\core\MY_Controller.php 13
+DEBUG - 2014-11-12 10:03:11 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 10:03:11 --> File loaded: application/views/notice/get_notice_list_view.php
+DEBUG - 2014-11-12 10:03:11 --> Final output sent to browser
+DEBUG - 2014-11-12 10:03:11 --> Total execution time: 0.0300
+DEBUG - 2014-11-12 03:03:20 --> Config Class Initialized
+DEBUG - 2014-11-12 03:03:20 --> Hooks Class Initialized
+DEBUG - 2014-11-12 03:03:20 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 03:03:20 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 03:03:20 --> URI Class Initialized
+DEBUG - 2014-11-12 03:03:20 --> Router Class Initialized
+DEBUG - 2014-11-12 03:03:20 --> Output Class Initialized
+DEBUG - 2014-11-12 03:03:20 --> Security Class Initialized
+DEBUG - 2014-11-12 03:03:20 --> Input Class Initialized
+DEBUG - 2014-11-12 03:03:20 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 10:03:20 --> Language Class Initialized
+DEBUG - 2014-11-12 10:03:20 --> Loader Class Initialized
+DEBUG - 2014-11-12 10:03:20 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 10:03:20 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 10:03:20 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 10:03:20 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 10:03:20 --> Controller Class Initialized
+DEBUG - 2014-11-12 10:03:20 --> Upload Class Initialized
+DEBUG - 2014-11-12 10:03:20 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 10:03:20 --> Final output sent to browser
+DEBUG - 2014-11-12 10:03:20 --> Total execution time: 0.0670
+DEBUG - 2014-11-12 03:32:21 --> Config Class Initialized
+DEBUG - 2014-11-12 03:32:21 --> Hooks Class Initialized
+DEBUG - 2014-11-12 03:32:21 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 03:32:21 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 03:32:21 --> URI Class Initialized
+DEBUG - 2014-11-12 03:32:21 --> Router Class Initialized
+DEBUG - 2014-11-12 03:32:21 --> Output Class Initialized
+DEBUG - 2014-11-12 03:32:21 --> Security Class Initialized
+DEBUG - 2014-11-12 03:32:21 --> Input Class Initialized
+DEBUG - 2014-11-12 03:32:21 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 10:32:21 --> Language Class Initialized
+DEBUG - 2014-11-12 10:32:21 --> Loader Class Initialized
+DEBUG - 2014-11-12 10:32:21 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 10:32:21 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 10:32:21 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 10:32:21 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 10:32:21 --> Controller Class Initialized
+DEBUG - 2014-11-12 10:32:21 --> Upload Class Initialized
+ERROR - 2014-11-12 10:32:21 --> Severity: Warning  --> First parameter must either be an object or the name of an existing class H:\wamp\www\CI_API\application\core\MY_Controller.php 13
+DEBUG - 2014-11-12 10:32:21 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 10:32:21 --> Model Class Initialized
+DEBUG - 2014-11-12 10:32:21 --> File loaded: application/views/notice/praise_notice_view.php
+DEBUG - 2014-11-12 10:32:21 --> Final output sent to browser
+DEBUG - 2014-11-12 10:32:21 --> Total execution time: 0.0450
+DEBUG - 2014-11-12 03:32:27 --> Config Class Initialized
+DEBUG - 2014-11-12 03:32:27 --> Hooks Class Initialized
+DEBUG - 2014-11-12 03:32:27 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 03:32:27 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 03:32:27 --> URI Class Initialized
+DEBUG - 2014-11-12 03:32:27 --> Router Class Initialized
+DEBUG - 2014-11-12 03:32:27 --> Output Class Initialized
+DEBUG - 2014-11-12 03:32:27 --> Security Class Initialized
+DEBUG - 2014-11-12 03:32:27 --> Input Class Initialized
+DEBUG - 2014-11-12 03:32:27 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 10:32:27 --> Language Class Initialized
+DEBUG - 2014-11-12 10:32:27 --> Loader Class Initialized
+DEBUG - 2014-11-12 10:32:27 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 10:32:27 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 10:32:27 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 10:32:27 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 10:32:27 --> Controller Class Initialized
+DEBUG - 2014-11-12 10:32:27 --> Upload Class Initialized
+DEBUG - 2014-11-12 10:32:27 --> Database Driver Class Initialized
+DEBUG - 2014-11-12 10:32:27 --> Model Class Initialized
+ERROR - 2014-11-12 10:32:27 --> Severity: Notice  --> Undefined index: user_list_worth H:\wamp\www\CI_API\application\models\notice_model.php 1175
+ERROR - 2014-11-12 10:32:27 --> Severity: Notice  --> Undefined index: counter_worth H:\wamp\www\CI_API\application\models\notice_model.php 1176
+ERROR - 2014-11-12 10:32:27 --> Severity: Warning  --> Missing argument 3 for User_timeline_model::insert(), called in H:\wamp\www\CI_API\application\controllers\notice\praiseNotice.php on line 51 and defined H:\wamp\www\CI_API\application\models\user_timeline_model.php 11
+ERROR - 2014-11-12 10:32:27 --> Severity: Notice  --> Undefined variable: timeline_type H:\wamp\www\CI_API\application\models\user_timeline_model.php 17
+DEBUG - 2014-11-12 10:32:27 --> Final output sent to browser
+DEBUG - 2014-11-12 10:32:27 --> Total execution time: 0.0650
+DEBUG - 2014-11-12 03:43:16 --> Config Class Initialized
+DEBUG - 2014-11-12 03:43:16 --> Hooks Class Initialized
+DEBUG - 2014-11-12 03:43:16 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 03:43:16 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 03:43:16 --> URI Class Initialized
+DEBUG - 2014-11-12 03:43:16 --> Router Class Initialized
+DEBUG - 2014-11-12 03:43:16 --> Output Class Initialized
+DEBUG - 2014-11-12 03:43:16 --> Security Class Initialized
+DEBUG - 2014-11-12 03:43:16 --> Input Class Initialized
+DEBUG - 2014-11-12 03:43:16 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 10:43:16 --> Language Class Initialized
+DEBUG - 2014-11-12 10:43:16 --> Loader Class Initialized
+DEBUG - 2014-11-12 10:43:16 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 10:43:16 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 10:43:16 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 10:43:16 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 10:43:16 --> Controller Class Initialized
+DEBUG - 2014-11-12 10:43:16 --> Upload Class Initialized
+ERROR - 2014-11-12 10:43:16 --> Severity: Warning  --> First parameter must either be an object or the name of an existing class H:\wamp\www\CI_API\application\core\MY_Controller.php 13
+DEBUG - 2014-11-12 10:43:16 --> Upload class already loaded. Second attempt ignored.
+DEBUG - 2014-11-12 10:43:16 --> File loaded: application/views/notice/post_image_view.php
+DEBUG - 2014-11-12 10:43:16 --> Final output sent to browser
+DEBUG - 2014-11-12 10:43:16 --> Total execution time: 0.0440
+DEBUG - 2014-11-12 03:43:23 --> Config Class Initialized
+DEBUG - 2014-11-12 03:43:23 --> Hooks Class Initialized
+DEBUG - 2014-11-12 03:43:23 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 03:43:23 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 03:43:23 --> URI Class Initialized
+DEBUG - 2014-11-12 03:43:23 --> Router Class Initialized
+DEBUG - 2014-11-12 03:43:23 --> Output Class Initialized
+DEBUG - 2014-11-12 03:43:23 --> Security Class Initialized
+DEBUG - 2014-11-12 03:43:23 --> Input Class Initialized
+DEBUG - 2014-11-12 03:43:23 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 10:43:23 --> Language Class Initialized
+DEBUG - 2014-11-12 10:43:23 --> Loader Class Initialized
+DEBUG - 2014-11-12 10:43:23 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 10:43:23 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 10:43:23 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 10:43:23 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 10:43:23 --> Controller Class Initialized
+DEBUG - 2014-11-12 10:43:23 --> Upload Class Initialized
+DEBUG - 2014-11-12 10:43:23 --> Upload class already loaded. Second attempt ignored.
+DEBUG - 2014-11-12 10:43:23 --> Language file loaded: language/english/upload_lang.php
+ERROR - 2014-11-12 10:43:23 --> You did not select a file to upload.
+DEBUG - 2014-11-12 10:43:23 --> Final output sent to browser
+DEBUG - 2014-11-12 10:43:23 --> Total execution time: 0.0540
+DEBUG - 2014-11-12 03:43:40 --> Config Class Initialized
+DEBUG - 2014-11-12 03:43:40 --> Hooks Class Initialized
+DEBUG - 2014-11-12 03:43:40 --> Utf8 Class Initialized
+DEBUG - 2014-11-12 03:43:40 --> UTF-8 Support Enabled
+DEBUG - 2014-11-12 03:43:40 --> URI Class Initialized
+DEBUG - 2014-11-12 03:43:40 --> Router Class Initialized
+DEBUG - 2014-11-12 03:43:40 --> Output Class Initialized
+DEBUG - 2014-11-12 03:43:40 --> Security Class Initialized
+DEBUG - 2014-11-12 03:43:40 --> Input Class Initialized
+DEBUG - 2014-11-12 03:43:40 --> Global POST and COOKIE data sanitized
+DEBUG - 2014-11-12 10:43:40 --> Language Class Initialized
+DEBUG - 2014-11-12 10:43:40 --> Loader Class Initialized
+DEBUG - 2014-11-12 10:43:40 --> Helper loaded: form_helper
+DEBUG - 2014-11-12 10:43:40 --> Helper loaded: curl_helper
+DEBUG - 2014-11-12 10:43:40 --> Helper loaded: url_helper
+DEBUG - 2014-11-12 10:43:40 --> Helper loaded: html_helper
+DEBUG - 2014-11-12 10:43:40 --> Controller Class Initialized
+DEBUG - 2014-11-12 10:43:40 --> Upload Class Initialized
+DEBUG - 2014-11-12 10:43:40 --> Upload class already loaded. Second attempt ignored.
+DEBUG - 2014-11-12 10:43:40 --> Final output sent to browser
+DEBUG - 2014-11-12 10:43:40 --> Total execution time: 0.0530

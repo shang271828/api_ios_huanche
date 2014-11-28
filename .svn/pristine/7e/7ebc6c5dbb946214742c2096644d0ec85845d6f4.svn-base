@@ -1,0 +1,164 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+	header("Content-Type: text/html; charset=utf-8");
+	require APPPATH.'/libraries/getui/IGt.Push.php';
+	define('APPID','m6sNjCnrQLAW5B7fdCmpCA');
+	define('APPKEY','y94uHtydxRAV22HHRGC1C8');
+	define('MASTERSECRET','pOF6lFLuqIAslFrh4Afxt2');
+	define('HOST','http://sdk.open.api.igexin.com/apiex.htm');
+
+class SendMessage extends MY_Controller
+{
+						
+	function __construct()
+	{
+		parent :: __construct();
+		$this->load->helper("form");
+		$this->load->model('message_model');
+		$this->load->model('user_model');
+		
+	}
+
+	function index()
+	{
+		$body = $this->input->body;
+
+		$this->destination_list = $body->destination_list;
+		$this->content 	   		= $body->content;
+		$uid = $this->input->head->uid;
+		if (property_exists ( $body, 'img_list'))
+			$this->img_list  = $body->img_list;
+		else
+			$this->img_list = [];		
+
+		$is_param_ok = $this->param_check();
+		
+		if($is_param_ok)
+		{
+			$mid = $this->message_model
+			  			->insert_message($this->destination_list,
+											$this->content 	   	,	
+											$this->img_list     	   		 
+										);
+
+			//$cid = 'c6d1e9fbf8ff97b086e79ae42d15325c';
+			$this->package = $this->user_model->get_avatar($uid);  
+			$this->package['destination_list'] = $this->destination_list;
+			$this->package['content']          = $this->content;
+			$this->package['img_list']         = $this->img_list; 
+			$this->package['time']         = $this->input->sysTime;	
+
+			$this->package['time_str']         = time_to_str($this->input->sysTime);			
+			$receive_uid = $this->destination_list  ;
+			
+			$receive_uid = (string)$receive_uid[0];
+
+			  $cid = $this->user_model->get_cid($receive_uid);
+			  $cid= $cid['cid'];
+			// $cid =  '0e90c26769ac007bbaf7f56e6163fafb';
+			   // $this->pair = '["'.$uid.'","'.$receive_uid.'"]';
+			 	$this->pair = array($uid,$receive_uid);
+			$this->pushMessageToSingle($cid);		
+
+			$this->output->set_body('result', 0);
+			$this->output->set_body('description', 'message sent!');
+			$this->output->set_body('getui_info', $this->rep);
+		}
+	}
+
+	function view_test()
+	{	
+		;$this->load->view('message/send_message_view')
+		;
+	}
+
+	function pushMessageToSingle($cid)
+	{
+	    $igt = new IGeTui(HOST,APPKEY,MASTERSECRET);
+
+	    //消息模版：
+	    // 1.TransmissionTemplate:透传功能模板
+	    // 2.LinkTemplate:通知打开链接功能模板
+	    // 3.NotificationTemplate：通知透传功能模板
+	    // 4.NotyPopLoadTemplate：通知弹框下载功能模板
+	     
+	       // $template = IGtNotyPopLoadTemplateDemo();
+	        //$template = IGtLinkTemplateDemo();
+	        //$template = IGtNotificationTemplateDemo();    
+	    $template = $this->IGtTransmissionTemplateDemo();
+	    //个推信息体
+	    $message = new IGtSingleMessage();
+	    $message->set_isOffline(true);//是否离线
+	    $message->set_offlineExpireTime(3600*12*1000);//离线时间
+	    $message->set_data($template);//设置推送消息类型
+	    //接收方
+	    $target = new IGtTarget();
+	    $target->set_appId(APPID);
+	    $target->set_clientId($cid);
+	    $this->rep = $igt->pushMessageToSingle($message,$target);
+	   
+	}
+
+	function IGtTransmissionTemplateDemo(){
+			$transmissionContent = $this->content;
+	        $template =  new IGtTransmissionTemplate();
+	        $template ->set_appId(APPID);//应用appid
+	        $template ->set_appkey(APPKEY);//应用appkey
+	        //通知栏
+	       
+	        $transmissionContent = array('type'=>'1',
+	        							 'key'=>$this->pair,
+	        							 'remark'=>$this->package['username'],
+	        							 'detail'=>$this->package);
+	        $payload = array('type'=>'1',
+	        				 'key'=>$this->pair,
+	        				 'remark'=>$this->package['username']);
+	        $payload = json_encode($payload);
+	        $transmissionContent = json_encode($transmissionContent);
+
+	        $template->set_transmissionType('1');//通知栏标题
+	        $template->set_transmissionContent($transmissionContent);//通知栏内容
+	        $message = "您收到 ".$this->package['username']." 的一条私信";
+	        $template->set_pushInfo("", 1,  $message, "",$payload,"","","");
+	        return $template;
+	}
+
+	private function param_check()
+	{
+	    $is_param_ok = true;
+	   
+		do
+		{
+			 $is_param_missing = !( $this->destination_list										
+								       			
+								  &&$this->content 	   				   	   		
+				                   ); 
+			if( $is_param_missing )
+			{
+				$is_param_ok = false;
+				$this->output->set_body('result', '1');
+				$this->output->set_body('description', 'parameter error!');
+				break;
+			}
+
+
+		}while(false);
+		return $is_param_ok;		
+	}
+}
+
+/*
+{
+ "head": {  
+    "uid"  : "1", 
+   "time"  : "2014-08-03 03:08:05", 
+   "token" : "9fd98454b511ce20120ecb593ed177e3"
+  },
+ "body":{  
+  "content"         : "my_message",
+  "img_list"        : ["http://xdream.co/CI_API/upload_dir/1303bcfae0b6c8f859bcc2aafcb2ee23.jpg","http://xdream.co/CI_API/upload_dir/225e97394f00e2bf3c42f34e665553c3.jpg"],
+  "destination_list":["2"]
+  }
+}
+
+*/

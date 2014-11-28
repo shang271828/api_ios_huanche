@@ -1,0 +1,136 @@
+<?php
+header("Content-Type: text/html; charset=utf-8");
+class GetArticleList extends MY_Controller
+{
+	function __construct()
+	{
+		parent ::__construct();
+		$this->load->database();
+		$this->load->helper(array("form","car_helper"));
+		$this->load->model("article_model");		
+	}
+
+	function index()
+	{
+		//unite test
+		$body = $this->input->body;
+
+		@$this->pageNumber    = $body->pageNumber;
+		@$this->numberPerPage = $body->numberPerPage;
+		@$this->articleType      = $body->articleType;
+
+		$is_param_ok = $this->article_param_check();
+		
+		if($is_param_ok)
+		{
+
+			$article_list = $this->article_model
+								->get_article_list($this->pageNumber,
+										 	      $this->numberPerPage,
+										 	      $this->articleType);
+
+			$total_row = $this->article_model
+						   	  ->get_total_row();
+			$img_list = array("http://xdream.co/CI_API/upload_dir/ea5520048c4c1464cfb42ac0c9ec646c.png",
+						"http://xdream.co/CI_API/upload_dir/ea5520048c4c1464cfb42ac0c9ec646c.png",
+						"http://xdream.co/CI_API/upload_dir/ea5520048c4c1464cfb42ac0c9ec646c.png");
+			//$img_list = json_encode($img_list);
+
+			$aid_list = array("36","35","34");			
+			//$aid_list = json_encode($aid_list);   	
+			$this->output->set_body("total_row", $total_row);
+
+			if (! $article_list)	
+			{
+				$this->output->set_body("result",1);
+				$this->output->set_body("description",NULL_ARTICLE);
+				$this->output->set_body("article_list", $article_list);
+			}
+			else
+			{
+				$this->output->set_body("result",0);
+				$this->output->set_body("description",GET_ARTICLE);
+				$this->output->set_body("article_list", $article_list);
+				$this->output->set_body("img_list", $img_list);
+				$this->output->set_body("aid_list", $aid_list);
+			}
+			
+			//$this->load->view("output_view");
+
+		}
+	}
+
+
+	function view_test()
+	{	
+		$this->load->view('notice/get_article_list_view');
+	}
+
+	function article_param_check()
+	{
+		$is_param_ok = TRUE;
+		$is_param_missing  = ! ($this->pageNumber&&$this->numberPerPage&&$this->articleType);
+		$is_param_nonnum   = ! (is_integer($this->pageNumber+0)
+			                  &&is_integer($this->numberPerPage+0));
+		$is_param_val_error = ($this->pageNumber<1) || ($this->numberPerPage>20);
+		
+		$articleTypeList = array(
+								1=>"all",
+								2=>"trends",
+								3=>"new_cars",
+								4=>'guide',
+								5=>"car_tips",
+								6=>"dailys",
+								7=>"car_life"
+								);
+
+		$is_param_str_error = ! array_search($this->articleType,$articleTypeList);
+
+		do
+		{
+			if ($is_param_missing)
+			{
+				$is_param_ok = FALSE;
+				$this->output->set_body("result",2);
+				$this->output->set_body("description",PARAMETER_MISSING);
+				break;
+			}
+			if($is_param_nonnum)
+			{
+				$is_param_ok = FALSE;
+				$this->output->set_body("result",3);
+				$this->output->set_body("description",WRONG_TYPE);
+				break;
+			}
+			if($is_param_val_error || $is_param_str_error )
+			{
+				$is_param_ok = FALSE;
+				$this->output->set_body("result",4);
+				$this->output->set_body("description",WRONG_VALUE);
+				break;
+			}
+			// if($is_param_str_error )
+			// {
+			// 	$is_param_ok = FALSE;
+			// 	$this->output->set_body("result",5);
+			// 	$this->output->set_body("description","articleType's value is wrong ");
+			// 	break;
+			// }
+		}while(FALSE);
+
+	return $is_param_ok;
+	}
+}
+//getarticle.php end
+/*input :
+{
+ "head":{    
+   "time"         : "2014-08-03 03:08:05" 
+  },
+ "body":{  
+  "pageNumber"    : "1",  
+  "numberPerPage" : "8",
+  "articleType"       : "all"
+  }
+}
+*/

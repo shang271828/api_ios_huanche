@@ -1,0 +1,239 @@
+<?php
+class publishCarNotice extends MY_Controller
+{
+
+	function __construct()
+	{
+		parent ::__construct();
+		$this->load->helper( array("url","form"));
+		$this->load->model("notice_model");
+		$this->load->model("user_timeline_model");
+		$this->load->model('user_relation_model');
+		$this->load->model('message_model');
+		$this->load->library("upload"); 		
+	}	
+
+	function index()
+	{	
+		$body = $this->input->body;
+
+		if (property_exists ( $body, 'nid'))
+			$this->nid  = $body->nid;
+		else						
+			$this->nid  = '0';
+		$this->title     = $body->title;
+		$this->content   = $body->content;
+		$this->img_list  = $body->img_list;
+		$this->car_info  = $body->car_info;
+
+		$this->check_car_info();		
+
+		$is_param_ok = $this->notice_param_check();
+		if($is_param_ok)
+		{
+			if ($this->nid  =='0')
+			{
+				$nid = $this->notice_model
+					 		->insert_normal_notice(  $this->title
+													,$this->content
+													,$this->img_list
+													,"2"
+													);
+			
+				$this->notice_model
+					 ->insert_car_notice($nid,
+					 					 $this->car_info);	
+					
+				$this->user_timeline_model
+					 					->insert($this->input->head->uid,
+							  					$nid,
+							  					"2");
+				/* 用户发布二手车信息推送功能 */
+				$head = $this->input->head;
+				$uid  = $head->uid;
+				$this->send_car_message($nid, $uid);
+
+				/* 功能模块结束 */
+	
+				$this->output->set_body("result",0);
+				$this->output->set_body("description",PUBLISH_CAR_NOTICE);
+			}
+			else
+			{
+				$this->notice_model
+					 ->update_normal_notice( $this->nid
+					 						,$this->title
+											,$this->content
+											,$this->img_list										
+											);
+			
+				$this->notice_model
+					 ->update_car_notice($this->nid,
+					 					 $this->car_info);	
+				$this->output->set_body("result",0);
+				$this->output->set_body("description",EDIT_CAR_NOTICE);
+			}
+		}
+
+	}
+
+	function view_test()
+	{	
+		$this->load->view('notice/publish_car_notice_view');
+	}
+
+	/* 用户发布二手车信息推送功能 */
+	private function send_car_message($nid, $uid)
+	{
+
+		$friend_list = $this->user_relation_model
+							    ->get_friend_initial_info($uid);
+							   
+		// $friend_list_initial = $friend_list->{"friend_list_initial"};
+		// $friend_info = json_decode(($friend_list_initial));
+
+		// $content = json_encode(
+		// 						array(
+		// 								$uid,
+		// 								$nid,
+		// 								$this->content
+		// 							)
+		// 						);		
+
+		// $this->message_model
+		// 	  ->insert_system_message($friend_info,
+		// 						$content 	   		,	
+		// 						$this->img_list     	   		 
+		// 					);
+	}
+
+	/* 功能模块结束 */
+
+	function notice_param_check()
+	{
+		$is_param_ok = TRUE;
+		
+		$is_param_missing = ! ($this->title 
+							&& $this->content);
+		
+		$is_car_info_missing = !(  property_exists ( $this->car_info, 'price')
+							   && property_exists ( $this->car_info, 'brand')
+							   && property_exists ( $this->car_info, 'car_location')
+							
+							   );
+
+		do
+		{
+			if ($is_param_missing)
+			{
+				$is_param_ok = FALSE;
+				$this->output->set_body("result",1);
+				$this->output->set_body("description",PARAMETER_MISSING);
+				break;
+			}
+
+			if(!$this->img_list)
+			{
+				$is_param_ok = FALSE;
+				$this->output->set_body("result",2);
+				$this->output->set_body("description","image missing");
+				break;				
+			}
+
+			if($is_car_info_missing)
+			{
+				$is_param_ok = FALSE;
+				$this->output->set_body("result",3);
+				$this->output->set_body("description","二手车信息输入不完整");
+				break;				
+			}
+
+
+		}while(FALSE);
+		return $is_param_ok;
+	}
+
+	function check_car_info()
+	{
+		if (!property_exists ( $this->car_info, 
+							  'car_configuration'))					
+			$this->car_info
+					 ->car_configuration        = [];
+		if (!property_exists ( $this->car_info, 
+							  'car_location')
+			&&property_exists ( $this->car_info, 
+							  'location'))
+			$this->car_info
+					 ->car_location  = $this->car_info->location;
+		if (!property_exists ( $this->car_info, 
+							  'commerce_insurance_date'))						
+			$this->car_info
+					 ->commerce_insurance_date  = '0000-00';
+		if (!property_exists ( $this->car_info, 
+							  'valid_date'))					
+			$this->car_info
+					 ->valid_date               = '0000-00';
+		if (!property_exists ( $this->car_info, 
+							  'insurance_date'))					
+			$this->car_info
+					 ->insurance_date           = '0000-00';
+		if (!property_exists ( $this->car_info, 
+							  'registration_time'))						
+			$this->car_info
+					 ->registration_time        = '0000-00';
+		if (!property_exists ( $this->car_info, 
+							  'mileage'))						
+			$this->car_info
+					 ->mileage                  = '';
+		if (!property_exists ( $this->car_info, 
+							  'speed_box'))						
+			$this->car_info
+					 ->speed_box                = '';
+		if (!property_exists ( $this->car_info, 
+							  'car_number'))						
+			$this->car_info
+					 ->car_number               = '';
+		if (!property_exists ( $this->car_info, 
+							  'exchange_time'))						
+			$this->car_info
+					 ->exchange_time            = '';
+
+	}
+
+
+}
+/*
+{
+    "head": {
+        "uid": "1",
+        "time": "2014-08-03 03:08:05",
+        "token": "9fd98454b511ce20120ecb593ed177e3"
+    },
+    "body": {
+        "nid": "2",
+        "title": "my_title",
+        "content": "my_content",
+        "img_list": [
+            "http://115.29.208.39/huanche_cms/upload_dir/thumb_b-Dealer14070112171.html302140g9ct2.jpg",
+            "http://115.29.208.39/huanche_cms/upload_dir/thumb_b-Dealer14070112171.html002140g9csw.jpg"
+        ],
+        "car_info": {
+            "price": "50",
+            "market_price": "70",
+            "car_location": "杭州",
+            "brand": "Benz",
+            "recency": "80",
+            "registration_time": "2012-09",
+            "speed_box": "auto",
+            "car_number": "AX4039",
+            "mileage": "2",
+            "valid_date": "2013-02",
+            "insurance_date": "2013-05",
+            "commerce_insurance_date": "2013-06",
+            "exchange_time": "1",
+            "car_configuration": ["abs"],
+            "sell_state":"2"
+        }
+    }
+}
+*/

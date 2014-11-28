@@ -1,0 +1,105 @@
+<?php
+class test extends CI_Controller
+{
+	function __construct()
+	{
+		header("Content-type: text/html; charset=utf-8");
+		parent :: __construct();
+		; $this->load->library('getui/igetui/template/IGtTransmissionTemplate','IGtTransmission')
+		// ; $this->load->helper('url')
+		; $this->load->model('user_model')
+		; $this->load->helper('curl_helper')
+		// ; $this->load->model('user_relation_model')
+		// ; $this->load->model('share_model')
+		// ; $this->load->model('menu_model')
+		// ; $this->load->model('topic_model')
+		; $this->load->model('weather_model')
+		; $this->load->model('notice_model')
+		// ; $this->load->library('javascript')
+		//; include("Snoopy.php")
+		;
+	}
+
+
+	// function index() /* 获取信息详情 */
+ //    {
+
+ //        $this->set_url();        
+
+ //        $output = https_request($this->url);
+
+ //        // $result = json_decode($output, true);
+ //        var_dump($output);
+ //       // return $result;
+ //    }
+    
+     function index()
+    {
+        echo substr("abcdef", 1); 
+        $tmp  = substr('浙A123',0,4);  
+        var_dump($tmp);
+    }
+
+    function set_input()
+    {
+    	$appid   = '239';
+    	$app_key = '95be4cf9c2a2744a6ad5273c70405ad6';
+    	$body 	 = $this->input->body;
+    	$car_number    = $body->car_number;
+    	$city_id       = $body->city_id;
+    	$frame_number  = property_check($body,'car_number',''); 
+    	$engine_number = property_check($body,'engine_number',''); 
+    	$regist_number = property_check($body,'regist_number','');
+
+    	$type_list = array(
+    						 "微型车"   => "01"                                                  
+    						,"小型车"   => "02"                                                  
+    						,"紧凑型车" => "03"                                                    
+    						,"中型车"   => "04"                                                  
+    						,"中大型车" => "05"                                                    
+    						,"豪华车"   => "06"                                                  
+    						,"跑车"     => "07"                                                
+    						,"SUV"      => "08"                                               
+    						,"MPV"      => "09"                                               
+    						,"面包车"   => "10"                                                  
+    						,"皮卡"     => "11" ); 
+
+    	$car_type = $type_list[$body->car_type]; 
+    	                                             
+    	$car_info = "{hphm=".$car_number."
+    				&classno=".$frame_number."
+    				&engineno =".$engine_number."
+    				&registno=".$regist_number."
+    				&city_id=".$city_id."
+    				&car_type=".$car_type."}";
+    	$timestamp = strtotime($this->input->sysTime);
+
+    	$sign = md5($app_id.$car_info.$timestamp.$app_key); 
+
+    	$tail = urlencode($car_info);
+    	$this->url = "http://www.cheshouye.com/api/weizhang/query_task?car_info="
+    				.$tail."&sign=".$sign;
+ 
+    }
+
+    function get_city_info($city)
+    {
+    	//各城市参数接口
+    	$url = "http://www.cheshouye.com/api/weizhang/get_all_config";
+    	$tmp = https_request($url);
+    	$city_info = json_decode($tmp,true);
+    	$city_info = $city_info['configs'];
+    	foreach ($city_info as $key => $value) 
+    	{
+    		$tmp = $value['citys'];
+    		foreach ($tmp as $key => $value) 
+    		{
+    			if($city == $value['city_name'])
+    			{
+    				$city_info = $value;
+    			}	
+    		}
+    	}
+    	return $city_info;
+    }
+}

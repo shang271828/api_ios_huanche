@@ -1,0 +1,203 @@
+<?php
+class MY_Input extends CI_Input
+{
+	var $input_length = 0;
+	function __construct()
+	{
+		parent :: __construct();
+		; ini_set('date.timezone','Asia/Shanghai')
+		; $this->sys_input()
+		; $this->_my_input()
+		; 
+		;
+	}
+	
+	function _my_input()
+	{
+		if(IS_DEBUG_INPUT)
+		{
+			; $this->json_package 
+				= json_decode(
+					$this->debug_input()
+					)
+			;
+		}
+		else
+		{
+			;$json_package = $this->post('json_package')
+			//;$json_package = urldecode($json_package)
+
+			; $this->json_package
+				= json_decode(
+					$json_package
+					)
+			;
+		}
+
+
+		; $json_package = & $this->json_package
+		
+		; $this->head   = & $json_package->head
+		; $this->body   = & $json_package->body 
+		; $this->body   = $this->obj_slash($this->body);
+		; $this->obj_input_len($json_package);
+		; 
+		; log_message('info', 
+        			  'input_length:'.$this->input_length.'|-|');
+		;
+		if(is_object($this->head))
+		{	
+			if(property_exists($this->head, 'uid'))
+			{
+				; $this->uid  = & $json_package->head->uid
+				;
+			}
+			if(property_exists($this->head, 'time'))
+			{
+				; $this->userTime = & $json_package->head->time
+				;
+			}
+			if(property_exists($this->head, 'token'))
+			{
+				; $this->token    = & $json_package->head->token
+				;
+			}
+			if(property_exists($this->head, 'cid'))
+			{
+				; $this->cid    = & $json_package->head->cid
+				;
+			}
+			if(property_exists($this->head, 'terminal'))
+			{
+				; $this->terminal    = & $json_package->head->terminal
+				;
+			}
+			else
+			{
+				; $this->terminal = 'unknown'
+				;
+			}
+			if(property_exists($this->head, 'coordinate'))
+			{
+				; $this->coordinate    = & $json_package->head->coordinate
+				;
+			}
+			else
+			{
+				; $this->coordinate = '0,0'
+				;
+			}
+
+	
+		}
+
+	}
+	private function obj_input_len($var)
+	{
+		if(is_object($var))
+    	{
+    		$tmp = json_encode($var);
+    		$array = json_decode($tmp,TRUE);
+    	}
+    	else
+    		$array = $var;	
+
+    	$this->json_utf8($array);
+
+	}
+ 
+	private function json_utf8(&$array)
+    {
+        if($array)
+        {
+           if(is_array($array))
+            {
+                foreach ( $array as $key=>&$value ) 
+                {
+                    $this->json_utf8($value);
+                    $value_a[] = $value;
+                    
+                    $key_a[]   = urlencode ( $key );
+                    $this->input_length += strlen($key);
+                }
+                $array = array_combine($key_a, $value_a);
+
+            }
+            else
+            {
+                $array = urlencode ( $array );
+                $this->input_length += strlen($array);
+            } 
+        }        
+
+    }
+	//在单引号前添加转义字符 输入和输出均为对象
+	private function obj_slash($var)
+	{
+		if(is_object($var))
+    	{
+    		$tmp = json_encode($var);
+    		$array = json_decode($tmp,TRUE);
+    	}
+    	else
+    		$array = $var;	
+
+    	$this->array_slash($array);
+    	$tmp = json_encode($array);
+    	return json_decode($tmp);
+	}
+	//在单引号前添加转义字符  输入和输出均为数组
+	private function array_slash(&$array)
+    {
+        if(is_array($array))
+        {
+            foreach ( $array as &$value ) 
+            {
+                $this->array_slash($value);
+            }
+        }
+        else
+        {
+            $this->str_addcslashes($array);
+        }
+    }
+
+    private function str_addcslashes(&$str)
+    {
+    	if(is_string($str))
+    		$str = addcslashes($str, "'");
+    }
+
+	private function sys_input()
+	{
+		; $this->sysTime = date('Y-m-d H:i:s')
+		;
+	}
+
+	private function debug_input() 
+	{
+		$uid    	 = "1";
+		$userTime    = "2014-10-28 13:52:05";
+		$password    = "123456";
+		$token       = md5($uid
+							.substr($userTime,0,-6) // '14-08-30 20:'
+							.$password);
+		$debug_struct = array
+		(
+			"head" => array 
+			(
+				"uid"  => $uid,
+			    "userTime"  => $userTime,
+			    "token"     => $token
+			),
+			"body" => array
+			(
+				"img_var_list"  => "http://xdream.co/upload/compressed_image/Newton.png",
+			    "imageName" => "Newton.png"
+			)
+		);
+		; return json_encode($debug_struct)
+		;
+	}
+}
+// end

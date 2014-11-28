@@ -1,0 +1,84 @@
+<?php
+class User_preference_model extends CI_Model
+{
+	function __construct()
+	{
+		parent ::__construct();
+		$this->load->database();
+		$this->define();
+	}
+
+	function addUser($uid)
+	{
+
+		$SQL = "INSERT INTO `prefix_user_preference` (`uid`, `price`, `mileage`, `brand`,`age`, `car_type`,`speed_box`) 
+				  VALUES (".$uid.", '', '', '', '','','')";
+		$this->db->query($SQL);
+	}
+
+
+
+	function insert($userInfo)
+	{
+
+		$uid = $this->input->head->uid;
+
+			$SQL = "UPDATE `prefix_user_preference` 
+					SET ";
+
+			$SQL .="`uid` = '".$uid."'" ;
+			if(property_exists($userInfo, 'price'))
+				$SQL .=",`price` = '".$userInfo->price."'" ; 
+			if(property_exists($userInfo, 'mileage'))
+				$SQL .=",`mileage` = '".$userInfo->mileage."' " ;
+			if(property_exists($userInfo, 'brand'))
+				$SQL .=",`brand` = '".$userInfo->brand."'" ; 
+			if(property_exists($userInfo, 'age'))
+				$SQL .=",`age` = '".$userInfo->age."'" ;
+			if(property_exists($userInfo, 'car_type'))
+				$SQL .=",`car_type` = '".$userInfo->car_type."'" ; 
+			if(property_exists($userInfo, 'speed_box'))
+				$SQL .=",`speed_box` = '".$userInfo->speed_box."' ";
+
+			$SQL .="WHERE `uid` = '".$uid."'";
+			$this->db->query($SQL);
+			$SQL = "UPDATE `prefix_user`
+					SET ";
+			$SQL .="`uid` = '".$uid."'" ;
+			if(property_exists($userInfo, 'username'))
+				$SQL .=",`username` = '".$userInfo->username."' ";
+			if(property_exists($userInfo, 'avatar_url'))
+				$SQL .=",`avatar_url` = '".$userInfo->avatar_url."' ";
+			if(property_exists($userInfo, 'user_age'))
+				$SQL .=",`user_age` = '".$userInfo->user_age."' ";
+			if(property_exists($userInfo, 'user_car'))
+				$SQL .=",`user_car` = '".$userInfo->user_car."'  ";
+			if(property_exists($userInfo, 'location'))
+				$SQL .=",`user_location` = '".$userInfo->location."' ";
+			if(property_exists($userInfo, 'gender'))
+				$SQL .=",`gender` = '".$userInfo->gender."' ";
+			$SQL .="WHERE `uid` = '".$uid."'";
+			$this->db->query($SQL);		
+
+	}
+
+
+
+	function define()
+	{
+		$this->table  = "prefix_user_preference";
+		$this->column = array
+		(
+			"uid",
+			"price" ,
+			"mileage",
+			"brand",
+			"age"     , 
+			"car_type" ,
+			"speed_box"
+
+        );
+	}
+
+
+}
