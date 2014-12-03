@@ -1,0 +1,232 @@
+<?php if (!defined('APPPATH')) exit('No direct script access allowed'); 
+
+class MY_Upload extends CI_Upload {
+    function __construct()
+    {
+        ; parent :: __construct()
+        ; $this->define()
+        ;
+    }
+
+    function my_upload_path($path)
+    {
+        ; $this->config['upload_path'] = $path
+        ; $this->initialize($this->config)
+        ;
+    }
+    
+    function set_upload_dir($path)
+    {
+        ; $this->config['upload_path'] = $path
+        ; $this->initialize($this->config)
+        ;
+    }
+
+  
+    function & fetch_img_accord_json($img_list_json)
+    {
+        ; $img_list =  json_decode($img_list_json)
+        ; $res_list = array()
+        ;
+        foreach ($img_list as $img_name) 
+        {
+            ; $img = $this->fetch_img_by_name($img_name)
+            ; 
+            if($img)
+            {
+                ; array_push($res_list, $img)
+                ;
+            }
+        }
+        ; $this->img_store = $res_list
+        ; return $this->img_store
+        ;
+
+
+    }
+
+    function fetch_img_by_name($img_name)
+    {
+        ; $this->my_upload_path($this->config['upload_path'])
+        ; $is_done   = $this->do_upload($img_name);    
+        ; 
+        if ( ! $is_done)                                         
+        {
+            ; $this->error = array("error" => $this->display_errors('',''));
+            ; return false
+            ;
+        } 
+        else 
+        {
+            ; $file_info = $this->data()
+            ; $full_name = $file_info['raw_name'].$file_info['file_ext']
+            ; $full_path = $file_info['full_path']
+            ; $file_size = $file_info['file_size']
+            ; return array('full_name' => $full_name
+                          ,'full_path' => $full_path
+                          ,'file_size' => $file_size
+                          ,'file_url'  => base_url().'upload_dir/'.$full_name
+                          )
+            ;
+        }
+    }
+    // 缩小图片
+    function create_thumbnail($full_path,$full_name,$maxwidth = 150,$maxheight = 150)
+    {      
+
+        $savefile = str_replace($full_name, '', $full_path).'thumb_'.$full_name;
+    
+        $this->imagecropper($full_path,$maxwidth,$maxheight,$savefile);
+
+        return $savefile;
+    }
+
+    private function imagecropper($source_path, $target_width, $target_height,$target_path)
+    {
+        $source_info   = getimagesize($source_path);
+    
+        $source_width  = $source_info[0];
+        $source_height = $source_info[1];
+        $source_mime   = $source_info['mime'];
+    
+        $source_ratio  = $source_height / $source_width;
+        $target_ratio  = $target_height / $target_width;
+    
+        // 源图过高
+        if ($source_ratio > $target_ratio)
+        {
+            $cropped_width  = $source_width;
+            $cropped_height = $source_width * $target_ratio;
+            $source_x = 0;
+            $source_y = ($source_height - $cropped_height) / 2;
+        }
+        // 源图过宽
+        elseif ($source_ratio < $target_ratio)
+        {
+            $cropped_width  = $source_height / $target_ratio;
+            $cropped_height = $source_height;
+            $source_x = ($source_width - $cropped_width) / 2;
+            $source_y = 0;
+        }
+        // 源图适中
+        else
+        {
+            $cropped_width  = $source_width;
+            $cropped_height = $source_height;
+            $source_x = 0;
+            $source_y = 0;
+        }
+    
+        switch ($source_mime)
+        {
+            case 'image/gif':
+                $source_image = imagecreatefromgif($source_path);
+                break;
+    
+            case 'image/jpeg':
+                $source_image = imagecreatefromjpeg($source_path);
+                break;
+    
+            case 'image/png':
+                $source_image = imagecreatefrompng($source_path);
+                break;
+    
+            default:
+                return false;
+                break;
+        }
+
+    
+        $target_image  = imagecreatetruecolor($target_width, $target_height);
+        $cropped_image = imagecreatetruecolor($cropped_width, $cropped_height);
+    
+        // 裁剪
+        imagecopy($cropped_image, $source_image, 0, 0, $source_x, $source_y, $cropped_width, $cropped_height); 
+        // 缩放
+        if(function_exists("imagecopyresampled"))
+        {
+           imagecopyresampled($target_image, $cropped_image, 0, 0, 0, 0, $target_width, $target_height, $cropped_width, $cropped_height);
+        }
+        else
+        {
+           imagecopyresized($target_image, $cropped_image, 0, 0, 0, 0, $target_width, $target_height, $cropped_width, $cropped_height);
+        }
+
+        imagejpeg($target_image,$target_path);
+        imagedestroy($source_image);
+        imagedestroy($target_image);
+        imagedestroy($cropped_image);
+    }
+
+
+    // private function resizeImage($im,$pic_width,$pic_height,$maxwidth,$maxheight,$name,$filetype)
+    // {
+    //     if(!$im)
+    //         return;
+    //     if(($maxwidth && $pic_width > $maxwidth) || ($maxheight && $pic_height > $maxheight))
+    //     {
+    //         if($maxwidth && $pic_width>$maxwidth)
+    //         {
+    //             $widthratio = $maxwidth/$pic_width;
+    //             $resizewidth_tag = true;
+    //         }
+    
+    //         if($maxheight && $pic_height>$maxheight)
+    //         {
+    //             $heightratio = $maxheight/$pic_height;
+    //             $resizeheight_tag = true;
+    //         }
+    
+    //         if($resizewidth_tag && $resizeheight_tag)
+    //         {
+    //             if($widthratio<$heightratio)
+    //                 $ratio = $widthratio;
+    //             else
+    //                 $ratio = $heightratio;
+    //         }
+    
+    //         if($resizewidth_tag && !$resizeheight_tag)
+    //             $ratio = $widthratio;
+    //         if($resizeheight_tag && !$resizewidth_tag)
+    //             $ratio = $heightratio;
+    
+    //         $newwidth = $pic_width * $ratio;
+    //         $newheight = $pic_height * $ratio;
+            
+    //         if(function_exists("imagecopyresampled"))
+    //         {
+    //             $newim = imagecreatetruecolor($newwidth,$newheight);
+    //            imagecopyresampled($newim,$im,0,0,0,0,$newwidth,$newheight,$pic_width,$pic_height);
+    //         }
+    //         else
+    //         {
+    //            $newim = imagecreate($newwidth,$newheight);
+    //            imagecopyresized($newim,$im,0,0,0,0,$newwidth,$newheight,$pic_width,$pic_height);
+    //         }
+    
+    //         imagejpeg($newim,$name);
+    //         imagedestroy($newim);
+    //     }
+    //     else
+    //     {
+    //         imagejpeg($im,$name);
+    //     }           
+    // }
+
+    
+
+   private function define()
+   {
+        ; $this->config 
+            = array(
+                 'upload_path'   => realpath('./upload_dir')
+                ,'allowed_types' => 'gif|jpg|png'
+                ,'max_size'      => '1200' //K 
+                ,'max_width'     => '2048'
+                ,'max_height'    => '2048'
+                ,'encrypt_name'  => true
+                )
+        ;
+   }
+}
+/* End of file upload_lib.php */

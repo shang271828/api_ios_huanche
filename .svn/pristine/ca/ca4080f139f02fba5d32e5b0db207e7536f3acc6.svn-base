@@ -1,0 +1,140 @@
+<?php
+class MY_Controller extends CI_Controller
+{
+	function __construct()
+	{
+		parent :: __construct();
+
+		; $this->load->library('upload')
+		; $this->record()
+		;$unverify = FALSE
+		;
+		;
+		if (is_object($this->input->body))
+		{
+			if(property_exists($this->input->body, 'pageType'))
+			{
+				if($this->input->body->pageType == 'mainpage')
+				{
+					$unverify = TRUE;
+				}
+			}
+		}
+		
+		
+		if(!IS_DEBUG)
+		{
+			if(!$unverify)
+			{
+				; $this->verify()
+				;
+			}
+		}	
+	}
+
+	private function verify()
+	{
+
+
+		if(!$this->is_time_ok())
+		{
+			; $this->output->set_user_code(1)
+			; exit()
+			;			
+		}
+	
+		if (!$this->unverify_user())	
+		{
+			if(!$this->is_uid_exist())
+			{
+				; $this->output->set_user_code(2)
+				; exit()
+				;
+			}
+	
+			if(!$this->is_token_Ok())
+			{
+				; $this->output->set_user_code(3)
+				; exit()
+				;			
+			}
+		}
+		
+
+		; $this->output->set_user_code(0)
+		; // through user verification
+	}
+
+	private function unverify_user()
+	{
+		
+
+		;$unverify = array('GetTopic'
+						 ,'GetArticleList'
+						 ,'GetArticleDetail'
+						 ,'GetNoticeDetail'
+						 ,'Register'
+						 ,'GetCaptcha'
+						 ,'ResetPassword'
+						 ,'DropDown'
+						 ,'GetUid'
+						 ,'HotSearch'
+						 ,'SearchNotice'
+						 
+						)
+		;$api_name = get_class($this)
+
+		;$bool = in_array($api_name, $unverify)
+		;return $bool
+		;
+		
+	}
+
+	private function is_uid_exist()
+	{
+
+		; $this->load->model('user_model')
+		; return 
+			$this->user_model
+				->is_uid_exist(
+					$this->input->uid
+					)
+		;
+	}	
+
+	private function is_time_ok()
+	{
+		; $userTimeStamp = strtotime($this->input->userTime);	
+	 	; $nowTimeStamp  = strtotime($this->input->sysTime);
+
+		; $timeDiff   = $nowTimeStamp - $userTimeStamp;    
+		; $timeRange  = 300;								
+		; return ( ($timeDiff < $timeRange)
+				&& ($timeDiff > -$timeRange))
+		;
+	}
+
+
+	private function is_token_Ok()
+	{
+
+		; $timeStr = substr($this->input->userTime,0,13) // example: '2019-11-09 09'
+		; $this->load->model('user_model')
+		; return $this->user_model->compare_user($timeStr,$this->input->token)
+	    ;		
+	}
+
+	function record()
+    {
+    	
+        log_message('info', 
+        			'api_name:'.get_class($this).'|-|');
+  
+        // if(property_exists($this->input->head,'uid'))
+        //  	log_message('info', 
+        // 			 	'uid:'.$this->input->head->uid.'|-|');
+
+    }
+	
+
+}

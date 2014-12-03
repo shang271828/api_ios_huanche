@@ -1,0 +1,86 @@
+<?php
+class publishNormalNotice extends MY_Controller
+{
+
+	function __construct()
+	{
+		parent ::__construct();
+		$this->load->helper( array("url","form"));
+		$this->load->model("notice_model");
+		$this->load->model("user_timeline_model");
+		$this->load->library("upload"); 		
+	}	
+
+	function index()
+	{	
+		$body = $this->input->body;
+		@$this->content = $body->content;
+		if (property_exists ( $body, 'title'))
+			$this->title  = $body->title;
+		elseif(strlen($this->content)<600)						
+			$this->title  = $this->content;
+		else
+			$this->title  = substr($this->content,0,600).'...';
+		if (property_exists ( $body, 'img_list'))
+			$this->img_list  = $body->img_list;
+		else						
+			$this->img_list  = '[]';
+
+		$is_param_ok = $this->notice_param_check();
+		if($is_param_ok)
+		{
+			$nid = $this->notice_model
+				        ->insert_normal_notice($this->title
+											  ,$this->content
+											  ,$this->img_list
+											  ,"1"
+											  );
+
+			$this->user_timeline_model
+									->insert($this->input->head->uid,
+											 $nid,
+											 '1');
+			$this->output->set_body("result",0);
+			$this->output->set_body("description","动态已发布");
+		}
+	}
+
+	function view_test()
+	{	
+		$this->load->view('notice/publish_normal_notice_view');
+	}
+	
+	function notice_param_check()
+	{
+		$is_param_ok = TRUE;
+		
+		$is_param_missing = ! ($this->content);
+		
+		do
+		{
+			if ($is_param_missing)
+			{
+				$is_param_ok = FALSE;
+				$this->output->set_body("result",1);
+				$this->output->set_body("description","输入为空");
+				break;
+			}
+
+		}while(FALSE);
+		return $is_param_ok;
+	}
+}
+/*
+{
+ "head": {  
+    "uid"  : "1", 
+   "time"  : "2014-08-03 03:08:05", 
+   "token" : "9fd98454b511ce20120ecb593ed177e3"
+  },
+ "body":{    
+  "content"         : "my_content",
+  "img_list"        : ["http://115.29.208.39/huanche_cms/upload_dir/thumb_b-Dealer14070112171.html002140g9csw.jpg"]
+
+  }
+}
+*/

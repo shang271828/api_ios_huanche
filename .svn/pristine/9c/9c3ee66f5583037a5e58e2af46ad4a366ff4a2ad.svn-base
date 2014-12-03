@@ -1,0 +1,157 @@
+<?php
+class test extends CI_Controller
+{
+	function __construct()
+	{
+		header("Content-type: text/html; charset=utf-8");
+		parent :: __construct();
+		; $this->load->library('getui/igetui/template/IGtTransmissionTemplate','IGtTransmission')
+		; $this->load->library('upload')
+		; $this->load->model('user_relation_model')
+		; $this->load->helper('curl_helper')
+		// ; $this->load->model('user_relation_model')
+		// ; $this->load->model('share_model')
+		// ; $this->load->model('menu_model')
+		// ; $this->load->model('topic_model')
+		//; $this->load->model('weather_model')
+		//; $this->load->model('notice_model')
+		// ; $this->load->library('javascript')
+		//; include("Snoopy.php")
+		;
+	}
+
+
+	// function index() /* 获取信息详情 */
+ //    {
+
+ //        $this->set_url();        
+
+ //        $output = https_request($this->url);
+
+ //        // $result = json_decode($output, true);
+ //        var_dump($output);
+ //       // return $result;
+ //    }
+    
+    function index()
+    {
+        // $this->load->driver('cache');
+        // $this->cache->memcached->save('foo', 'bar', 10);
+        // $this->cache->memcached->save('foo', 'bar', 10);
+        // echo $foo;
+        
+        var_dump($body->location_package->addressComponent->streetNumber->location);
+
+  
+    }
+       
+    //输入uid 和 粉丝数，返回随机的粉丝数组
+    function generate_rand_follower($uid,$follower_num = 50)
+    {
+        for($i=120;$i<180;$i++)
+        {
+            $array1[] = (string)$i;
+        }
+
+        for($i=183;$i<272;$i++)
+        {
+            $array2[] = (string)$i;
+        }
+
+        //$array = array_merge($array1,$array2);
+        for ($i=0; $i < $follower_num ; $i++) 
+        { 
+            $num = rand(1,2);
+            if( $num == 1)
+            {
+                $key = array_rand($array1, 1);
+                $rand_array[] = (string)$array1[$key] ;
+            }
+                
+            elseif($num == 2)
+            {
+                $key = array_rand($array2, 1);
+                $rand_array[] = (string)$array2[$key] ;
+            }
+                
+        }      
+
+        $str = json_encode($rand_array);
+        echo $str;       
+    }
+
+
+
+    function resizeImage($im,$maxwidth,$maxheight,$name,$filetype)
+    {
+        $pic_width = imagesx($im);
+        $pic_height = imagesy($im);
+    
+        if(($maxwidth && $pic_width > $maxwidth) || ($maxheight && $pic_height > $maxheight))
+        {
+            if($maxwidth && $pic_width>$maxwidth)
+            {
+                $widthratio = $maxwidth/$pic_width;
+                $resizewidth_tag = true;
+            }
+    
+            if($maxheight && $pic_height>$maxheight)
+            {
+                $heightratio = $maxheight/$pic_height;
+                $resizeheight_tag = true;
+            }
+    
+            if($resizewidth_tag && $resizeheight_tag)
+            {
+                if($widthratio<$heightratio)
+                    $ratio = $widthratio;
+                else
+                    $ratio = $heightratio;
+            }
+    
+            if($resizewidth_tag && !$resizeheight_tag)
+                $ratio = $widthratio;
+            if($resizeheight_tag && !$resizewidth_tag)
+                $ratio = $heightratio;
+    
+            $newwidth = $pic_width * $ratio;
+            $newheight = $pic_height * $ratio;
+    
+            if(function_exists("imagecopyresampled"))
+            {
+                $newim = imagecreatetruecolor($newwidth,$newheight);
+               imagecopyresampled($newim,$im,0,0,0,0,$newwidth,$newheight,$pic_width,$pic_height);
+            }
+            else
+            {
+               $newim = imagecreate($newwidth,$newheight);
+               imagecopyresized($newim,$im,0,0,0,0,$newwidth,$newheight,$pic_width,$pic_height);
+            }
+    
+            $name = $name.$filetype;
+            imagejpeg($newim,$name);
+            imagedestroy($newim);
+        }
+        else
+        {
+            $name = $name.$filetype;
+            imagejpeg($im,$name);
+        }           
+    }
+}
+
+//test zone
+/*
+
+$array = array(  array("num"=>"01","字符串"=>"qqq","str"=>"奔驰")
+                ,array("num"=>"02","字符串"=>"www","str"=>"宝马")
+                ,array("num"=>"03","字符串"=>"eee","str"=>"奥迪")
+                ,array("num"=>"04","字符串"=>"rrr","str"=>"路虎")
+                ,array("num"=>"05","字符串"=>"ttt","str"=>"丰田"));
+
+
+
+
+
+
+*/
